@@ -1,1 +1,2 @@
-// qk-str: workspace root crate (integration tests only)
+pub mod cmd;
+pub mod common;

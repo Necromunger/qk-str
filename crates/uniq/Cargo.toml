@@ -1,9 +1,0 @@
-[package]
-name = "uniq"
-version.workspace = true
-edition.workspace = true
-license.workspace = true
-description = "qk-str: uniq command"
-
-[dependencies]
-qk-common.workspace = true

@@ -35,25 +35,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "b64"
-version = "0.1.0"
-dependencies = [
- "base64",
- "qk-common",
-]
-
-[[package]]
 name = "base64"
 version = "0.22.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "72b3254f16251a8381aa12e40e3c4d2f0199f8c6508fbecb9d91f575e0fbb8c6"
-
-[[package]]
-name = "between"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
 
 [[package]]
 name = "bitflags"
@@ -87,20 +72,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
 
 [[package]]
-name = "chars"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
-
-[[package]]
-name = "contains"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
-
-[[package]]
 name = "core-foundation"
 version = "0.10.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -115,13 +86,6 @@ name = "core-foundation-sys"
 version = "0.8.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "773648b94d0e5d620f64f280777445740e61fe701025087ec8b57f45c791888b"
-
-[[package]]
-name = "count"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
 
 [[package]]
 name = "cpufeatures"
@@ -173,27 +137,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "empty"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
-
-[[package]]
-name = "ends"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
-
-[[package]]
-name = "eq"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
-
-[[package]]
 name = "equivalent"
 version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -214,14 +157,6 @@ name = "fastrand"
 version = "2.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "37909eebbb50d72f9059c3b6d82c0463f2ff062c9e95845c43a6c9c0355411be"
-
-[[package]]
-name = "fetch"
-version = "0.1.0"
-dependencies = [
- "qk-common",
- "ureq",
-]
 
 [[package]]
 name = "find-msvc-tools"
@@ -293,14 +228,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "hash"
-version = "0.1.0"
-dependencies = [
- "qk-common",
- "sha2",
-]
-
-[[package]]
 name = "hashbrown"
 version = "0.15.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -328,13 +255,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "62b467343b94ba476dcb2500d242dadbb39557df889310ac77c5d99100aaac33"
 dependencies = [
  "libc",
-]
-
-[[package]]
-name = "hex"
-version = "0.1.0"
-dependencies = [
- "qk-common",
 ]
 
 [[package]]
@@ -458,24 +378,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "isnum"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
-
-[[package]]
 name = "itoa"
 version = "1.0.17"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "92ecc6618181def0457392ccd0ee51198e065e016d1d527a7ac1b6dc7c1f09d2"
-
-[[package]]
-name = "join"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
 
 [[package]]
 name = "leb128fmt"
@@ -484,24 +390,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "09edd9e8b54e49e587e4f6295a7d29c3ea94d469cb40ab8ca70b288248a81db2"
 
 [[package]]
-name = "len"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
-
-[[package]]
 name = "libc"
 version = "0.2.183"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b5b646652bf6661599e1da8901b3b9522896f01e736bad5f723fe7a3a27f899d"
-
-[[package]]
-name = "lines"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
 
 [[package]]
 name = "linux-raw-sys"
@@ -520,29 +412,6 @@ name = "log"
 version = "0.4.29"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5e5032e24019045c762d3c0f28f5b6b8bbf38563a65908389bf7978758920897"
-
-[[package]]
-name = "lower"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
-
-[[package]]
-name = "match"
-version = "0.1.0"
-dependencies = [
- "qk-common",
- "regex",
-]
-
-[[package]]
-name = "matchall"
-version = "0.1.0"
-dependencies = [
- "qk-common",
- "regex",
-]
 
 [[package]]
 name = "memchr"
@@ -575,13 +444,6 @@ dependencies = [
  "security-framework",
  "security-framework-sys",
  "tempfile",
-]
-
-[[package]]
-name = "nth"
-version = "0.1.0"
-dependencies = [
- "qk-common",
 ]
 
 [[package]]
@@ -635,13 +497,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "pad"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
-
-[[package]]
 name = "percent-encoding"
 version = "2.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -682,15 +537,15 @@ dependencies = [
 ]
 
 [[package]]
-name = "qk-common"
+name = "qk-str"
 version = "0.1.0"
 dependencies = [
  "atty",
+ "base64",
+ "regex",
+ "sha2",
+ "ureq",
 ]
-
-[[package]]
-name = "qk-str"
-version = "0.1.0"
 
 [[package]]
 name = "quote"
@@ -735,34 +590,6 @@ name = "regex-syntax"
 version = "0.8.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "dc897dd8d9e8bd1ed8cdad82b5966c3e0ecae09fb1907d58efaa013543185d0a"
-
-[[package]]
-name = "repeat"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
-
-[[package]]
-name = "replace"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
-
-[[package]]
-name = "rev"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
-
-[[package]]
-name = "rpad"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
 
 [[package]]
 name = "rustix"
@@ -881,44 +708,16 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e320a6c5ad31d271ad523dcf3ad13e2767ad8b1cb8f047f75a8aeaf8da139da2"
 
 [[package]]
-name = "slug"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
-
-[[package]]
 name = "smallvec"
 version = "1.15.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "67b1b7a3b5fe4f1376887184045fcf45c69e92af734b7aaddc05fb777b6fbd03"
 
 [[package]]
-name = "split"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
-
-[[package]]
 name = "stable_deref_trait"
 version = "1.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6ce2be8dc25455e1f91df71bfa12ad37d7af1092ae736f3a6cd0e37bc7810596"
-
-[[package]]
-name = "starts"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
-
-[[package]]
-name = "sub"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
 
 [[package]]
 name = "syn"
@@ -966,13 +765,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "trim"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
-
-[[package]]
 name = "typenum"
 version = "1.19.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -989,20 +781,6 @@ name = "unicode-xid"
 version = "0.2.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ebc1c04c71510c7f702b52b7c350734c9ff1295c464a03335b00bb84fc54f853"
-
-[[package]]
-name = "uniq"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
-
-[[package]]
-name = "upper"
-version = "0.1.0"
-dependencies = [
- "qk-common",
-]
 
 [[package]]
 name = "ureq"

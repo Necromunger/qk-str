@@ -1,9 +1,0 @@
-[package]
-name = "split"
-version.workspace = true
-edition.workspace = true
-license.workspace = true
-description = "qk-str: split command"
-
-[dependencies]
-qk-common.workspace = true

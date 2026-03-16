@@ -1,9 +1,0 @@
-[package]
-name = "replace"
-version.workspace = true
-edition.workspace = true
-license.workspace = true
-description = "qk-str: replace command"
-
-[dependencies]
-qk-common.workspace = true

@@ -1,9 +1,0 @@
-[package]
-name = "join"
-version.workspace = true
-edition.workspace = true
-license.workspace = true
-description = "qk-str: join command"
-
-[dependencies]
-qk-common.workspace = true

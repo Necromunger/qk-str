@@ -20,9 +20,9 @@ jobs:
           components: clippy, rustfmt
       - uses: Swatinem/rust-cache@v2
       - run: cargo fmt --check
-      - run: cargo clippy --workspace -- -D warnings
-      - run: cargo build --workspace
-      - run: cargo test --workspace
+      - run: cargo clippy -- -D warnings
+      - run: cargo build
+      - run: cargo test
 
   publish:
     needs: test
@@ -58,7 +58,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           key: release-${{ matrix.target }}
-      - run: cargo build --workspace --release --target ${{ matrix.target }}
+      - run: cargo build --release --target ${{ matrix.target }}
       - name: Package binaries
         shell: bash
         run: |
@@ -66,11 +66,9 @@ jobs:
           dir="qk-str-v${version}-${{ matrix.target }}"
           mkdir "$dir"
           if [[ "${{ matrix.target }}" == *windows* ]]; then
-            cp target/${{ matrix.target }}/release/*.exe "$dir/" 2>/dev/null || true
+            cp target/${{ matrix.target }}/release/qk.exe "$dir/"
           else
-            for bin in eq contains starts ends empty isnum len trim upper lower replace rev slug between sub nth match matchall count split chars lines uniq pad rpad repeat hash b64 hex join fetch; do
-              cp "target/${{ matrix.target }}/release/$bin" "$dir/" 2>/dev/null || true
-            done
+            cp target/${{ matrix.target }}/release/qk "$dir/"
           fi
           7z a "${dir}.zip" "$dir"
       - uses: actions/upload-artifact@v4

@@ -1,9 +1,0 @@
-[package]
-name = "empty"
-version.workspace = true
-edition.workspace = true
-license.workspace = true
-description = "qk-str: empty command"
-
-[dependencies]
-qk-common.workspace = true

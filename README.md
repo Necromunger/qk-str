@@ -1,6 +1,6 @@
 # qk-str
 
-Common string utility functions as standalone CLI commands, for humans and AI agents.
+Common string utility functions as a single CLI binary (`qk`), for humans and AI agents.
 
 ## Install
 
@@ -12,70 +12,70 @@ Or grab a binary from [GitHub Releases](https://github.com/Necromunger/qk-str/re
 
 ## How it works
 
-Every tool takes **arg1 as the context** (the thing being operated on). If you pipe stdin, it replaces arg1 — that's how composition works:
+Every command takes **arg1 as the context** (the thing being operated on). If you pipe stdin, it replaces arg1 — that's how composition works:
 
 ```bash
-echo "  Hello World  " | trim | upper
+echo "  Hello World  " | qk trim | qk upper
 # HELLO WORLD
 
-split "a,b,c" "," | join "-"
+qk split "a,b,c" "," | qk join "-"
 # a-b-c
 
-echo "Hello World!" | slug
+echo "Hello World!" | qk slug
 # hello-world
 
-echo "secret" | b64 | b64 -d
+echo "secret" | qk b64 | qk b64 -d
 # secret
 ```
 
 Pipe results straight to your clipboard:
 
 ```bash
-trim "  hello  " | clip
+qk trim "  hello  " | clip
 ```
 
 Boolean tools exit 0 (true) or 1 (false) — perfect for `if`/`&&`:
 
 ```bash
-contains "hello world" "world" && echo "found it"
-isnum "42.5" && echo "it's a number"
+qk contains "hello world" "world" && echo "found it"
+qk isnum "42.5" && echo "it's a number"
 ```
 
 ## Tools
 
 | Tool | Example | Output |
 |------|---------|--------|
-| eq | `eq "a" "b"` | exit 0 if equal |
-| contains | `contains "haystack" "needle"` | exit 0 if found |
-| starts | `starts "hello" "hel"` | exit 0 if prefix matches |
-| ends | `ends "file.txt" ".txt"` | exit 0 if suffix matches |
-| isnum | `isnum "42.5"` | exit 0 if parseable as number |
-| empty | `empty ""` | exit 0 if zero-length |
-| len | `len "hello"` | `5` |
-| trim | `trim "  hi  "` | `hi` |
-| upper | `upper "hello"` | `HELLO` |
-| lower | `lower "Hello"` | `hello` |
-| replace | `replace "foo bar" "foo" "baz"` | `baz bar` |
-| between | `between "a[b]c" "[" "]"` | `b` |
-| split | `split "a,b,c" ","` | `a\nb\nc` |
-| count | `count "abab" "ab"` | `2` |
-| rev | `rev "hello"` | `olleh` |
-| repeat | `repeat "ab" 3` | `ababab` |
-| pad | `pad "42" 5 "0"` | `00042` |
-| rpad | `rpad "hi" 5 "."` | `hi...` |
-| sub | `sub "hello world" 6 5` | `world` |
-| lines | `lines file.txt` | line count |
-| nth | `nth "a,b,c" "," 1` | `b` |
-| join | `... \| join ","` | joins stdin lines |
-| uniq | `uniq "abcabc"` | `abc` |
-| chars | `chars "hello"` | `h\ne\nl\nl\no` |
-| match | `match "hello123" "\d+"` | `123` |
-| matchall | `matchall "a1b2" "\d"` | `1\n2` |
-| slug | `slug "Hello World!"` | `hello-world` |
-| hash | `hash "data"` | SHA-256 hex |
-| b64 | `b64 "hello"` | `aGVsbG8=` |
-| hex | `hex "AB"` | `4142` |
-| fetch | `fetch "https://example.com"` | HTTP GET body |
+| eq | `qk eq "a" "b"` | exit 0 if equal |
+| contains | `qk contains "haystack" "needle"` | exit 0 if found |
+| starts | `qk starts "hello" "hel"` | exit 0 if prefix matches |
+| ends | `qk ends "file.txt" ".txt"` | exit 0 if suffix matches |
+| isnum | `qk isnum "42.5"` | exit 0 if parseable as number |
+| empty | `qk empty ""` | exit 0 if zero-length |
+| len | `qk len "hello"` | `5` |
+| trim | `qk trim "  hi  "` | `hi` |
+| upper | `qk upper "hello"` | `HELLO` |
+| lower | `qk lower "Hello"` | `hello` |
+| replace | `qk replace "foo bar" "foo" "baz"` | `baz bar` |
+| between | `qk between "a[b]c" "[" "]"` | `b` |
+| split | `qk split "a,b,c" ","` | `a\nb\nc` |
+| count | `qk count "abab" "ab"` | `2` |
+| rev | `qk rev "hello"` | `olleh` |
+| repeat | `qk repeat "ab" 3` | `ababab` |
+| pad | `qk pad "42" 5 "0"` | `00042` |
+| rpad | `qk rpad "hi" 5 "."` | `hi...` |
+| sub | `qk sub "hello world" 6 5` | `world` |
+| lines | `qk lines file.txt` | line count |
+| nth | `qk nth "a,b,c" "," 1` | `b` |
+| join | `... \| qk join ","` | joins stdin lines |
+| uniq | `qk uniq "abcabc"` | `abc` |
+| chars | `qk chars "hello"` | `h\ne\nl\nl\no` |
+| match | `qk match "hello123" "\d+"` | `123` |
+| matchall | `qk matchall "a1b2" "\d"` | `1\n2` |
+| slug | `qk slug "Hello World!"` | `hello-world` |
+| hash | `qk hash "data"` | SHA-256 hex |
+| b64 | `qk b64 "hello"` | `aGVsbG8=` |
+| hex | `qk hex "AB"` | `4142` |
+| fetch | `qk fetch "https://example.com"` | HTTP GET body |
 
 ## License
 

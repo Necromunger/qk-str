@@ -6,11 +6,13 @@ fn bin(name: &str) -> Command {
     path.push("target");
     path.push("debug");
     if cfg!(windows) {
-        path.push(format!("{name}.exe"));
+        path.push("qk.exe");
     } else {
-        path.push(name);
+        path.push("qk");
     }
-    Command::new(path)
+    let mut cmd = Command::new(path);
+    cmd.arg(name);
+    cmd
 }
 
 fn run(name: &str, args: &[&str]) -> Output {
@@ -360,7 +362,6 @@ fn join_space() {
 
 #[test]
 fn pipe_upper_then_contains() {
-    // upper "hello" | contains "HELLO"
     let upper_out = run("upper", &["hello"]);
     let text = stdout(&upper_out);
     let result = pipe_to("contains", &["HELLO"], &text);
@@ -369,7 +370,6 @@ fn pipe_upper_then_contains() {
 
 #[test]
 fn pipe_split_then_join() {
-    // split "a,b,c" "," | join "-"
     let split_out = stdout(&run("split", &["a,b,c", ","]));
     let join_out = pipe_to("join", &["-"], &format!("{split_out}\n"));
     assert_eq!(stdout(&join_out), "a-b-c");
@@ -377,7 +377,6 @@ fn pipe_split_then_join() {
 
 #[test]
 fn pipe_trim_then_upper() {
-    // trim "  hello  " | upper
     let trimmed = stdout(&run("trim", &["  hello  "]));
     let result = pipe_to("upper", &[], &trimmed);
     assert_eq!(stdout(&result), "HELLO");
@@ -385,7 +384,6 @@ fn pipe_trim_then_upper() {
 
 #[test]
 fn pipe_replace_then_slug() {
-    // replace "Hello World" "World" "Rust" | slug
     let replaced = stdout(&run("replace", &["Hello World", "World", "Rust"]));
     let result = pipe_to("slug", &[], &replaced);
     assert_eq!(stdout(&result), "hello-rust");
@@ -393,7 +391,6 @@ fn pipe_replace_then_slug() {
 
 #[test]
 fn pipe_b64_roundtrip() {
-    // b64 "secret" | b64 -d
     let encoded = stdout(&run("b64", &["secret"]));
     let decoded = pipe_to("b64", &["-d"], &encoded);
     assert_eq!(stdout(&decoded), "secret");
@@ -408,7 +405,6 @@ fn pipe_hex_roundtrip() {
 
 #[test]
 fn pipe_match_then_len() {
-    // match "abc123def" "\d+" | len  → 3
     let matched = stdout(&run("match", &["abc123def", r"\d+"]));
     let result = pipe_to("len", &[], &matched);
     assert_eq!(stdout(&result), "3");
@@ -438,4 +434,18 @@ fn match_invalid_regex() {
 #[test]
 fn sub_invalid_offset() {
     assert_eq!(run("sub", &["hi", "abc", "1"]).status.code(), Some(2));
+}
+
+#[test]
+fn unknown_command() {
+    let mut path = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+    path.push("target");
+    path.push("debug");
+    if cfg!(windows) {
+        path.push("qk.exe");
+    } else {
+        path.push("qk");
+    }
+    let o = Command::new(path).arg("nonexistent").output().unwrap();
+    assert_eq!(o.status.code(), Some(2));
 }

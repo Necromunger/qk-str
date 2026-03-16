@@ -14,7 +14,3 @@
 - [x] Write README.md with tool table, install instructions, pipe examples
 - [x] Set up GitHub Actions CI (dev/main split, main auto-publishes)
 - [ ] Push to GitHub, verify CI passes, merge dev → main to trigger first publish
-
-### Consider agent use
-- [x] Created AGENTS.md — compact tool reference for LLM context windows
-
