@@ -34,9 +34,12 @@ Pipe results straight to your clipboard:
 qk trim "  hello  " | clip
 ```
 
-Boolean tools exit 0 (true) or 1 (false) — perfect for `if`/`&&`:
+Boolean tools print `true`/`false` and exit 0/1 — useful standalone or in `if`/`&&`:
 
 ```bash
+qk contains "hello world" "world"
+# true
+
 qk contains "hello world" "world" && echo "found it"
 qk isnum "42.5" && echo "it's a number"
 ```
@@ -45,12 +48,12 @@ qk isnum "42.5" && echo "it's a number"
 
 | Tool | Example | Output |
 |------|---------|--------|
-| eq | `qk eq "a" "b"` | exit 0 if equal |
-| contains | `qk contains "haystack" "needle"` | exit 0 if found |
-| starts | `qk starts "hello" "hel"` | exit 0 if prefix matches |
-| ends | `qk ends "file.txt" ".txt"` | exit 0 if suffix matches |
-| isnum | `qk isnum "42.5"` | exit 0 if parseable as number |
-| empty | `qk empty ""` | exit 0 if zero-length |
+| eq | `qk eq "a" "b"` | `true`/`false` |
+| contains | `qk contains "haystack" "needle"` | `true`/`false` |
+| starts | `qk starts "hello" "hel"` | `true`/`false` |
+| ends | `qk ends "file.txt" ".txt"` | `true`/`false` |
+| isnum | `qk isnum "42.5"` | `true`/`false` |
+| empty | `qk empty ""` | `true`/`false` |
 | len | `qk len "hello"` | `5` |
 | trim | `qk trim "  hi  "` | `hi` |
 | upper | `qk upper "hello"` | `HELLO` |
