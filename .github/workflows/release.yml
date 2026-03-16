@@ -75,7 +75,7 @@ jobs:
             cp target/${{ matrix.target }}/release/qk "$dir/"
           fi
           7z a "${dir}.zip" "$dir"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v5
         with:
           name: qk-str-${{ matrix.target }}
           path: "*.zip"
@@ -90,7 +90,7 @@ jobs:
         run: |
           version=$(cargo metadata --no-deps --format-version 1 | python3 -c "import sys,json; print(json.load(sys.stdin)['packages'][0]['version'])")
           echo "version=v${version}" >> "$GITHUB_OUTPUT"
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v5
         with:
           merge-multiple: true
       - uses: softprops/action-gh-release@v2
