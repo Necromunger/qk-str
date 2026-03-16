@@ -4,6 +4,7 @@ version.workspace = true
 edition.workspace = true
 license.workspace = true
 description.workspace = true
+repository.workspace = true
 
 [workspace]
 members = [
@@ -46,7 +47,7 @@ resolver = "3"
 version = "0.1.0"
 edition = "2024"
 license = "MIT"
-description = "31 string commands for your terminal. No flags. No ceremony."
+description = "Common string utility functions as standalone CLI commands, for humans and AI agents."
 repository = "https://github.com/Necromunger/qk-str"
 
 [workspace.dependencies]

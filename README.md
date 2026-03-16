@@ -1,6 +1,6 @@
 # qk-str
 
-31 string commands for your terminal. No flags. No ceremony.
+Common string utility functions as standalone CLI commands, for humans and AI agents.
 
 ## Install
 
