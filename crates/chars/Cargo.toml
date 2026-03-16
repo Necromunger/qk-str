@@ -1,0 +1,9 @@
+[package]
+name = "chars"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "qk-str: chars command"
+
+[dependencies]
+qk-common.workspace = true

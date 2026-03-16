@@ -1,0 +1,10 @@
+[package]
+name = "fetch"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "qk-str: fetch command"
+
+[dependencies]
+qk-common.workspace = true
+ureq.workspace = true

@@ -1,0 +1,10 @@
+[package]
+name = "match"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "qk-str: match command"
+
+[dependencies]
+qk-common.workspace = true
+regex.workspace = true

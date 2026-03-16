@@ -1,0 +1,9 @@
+[package]
+name = "count"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "qk-str: count command"
+
+[dependencies]
+qk-common.workspace = true

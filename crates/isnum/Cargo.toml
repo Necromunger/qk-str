@@ -1,0 +1,9 @@
+[package]
+name = "isnum"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "qk-str: isnum command"
+
+[dependencies]
+qk-common.workspace = true

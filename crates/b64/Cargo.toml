@@ -1,0 +1,10 @@
+[package]
+name = "b64"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "qk-str: b64 command"
+
+[dependencies]
+qk-common.workspace = true
+base64.workspace = true

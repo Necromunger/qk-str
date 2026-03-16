@@ -1,0 +1,9 @@
+[package]
+name = "sub"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "qk-str: sub command"
+
+[dependencies]
+qk-common.workspace = true

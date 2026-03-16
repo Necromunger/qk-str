@@ -1,0 +1,9 @@
+[package]
+name = "len"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "qk-str: len command"
+
+[dependencies]
+qk-common.workspace = true

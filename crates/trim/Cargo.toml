@@ -1,0 +1,9 @@
+[package]
+name = "trim"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "qk-str: trim command"
+
+[dependencies]
+qk-common.workspace = true

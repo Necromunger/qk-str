@@ -1,0 +1,57 @@
+[package]
+name = "qk-str"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description.workspace = true
+
+[workspace]
+members = [
+    "crates/qk-common",
+    "crates/eq",
+    "crates/contains",
+    "crates/starts",
+    "crates/ends",
+    "crates/empty",
+    "crates/isnum",
+    "crates/len",
+    "crates/trim",
+    "crates/upper",
+    "crates/lower",
+    "crates/replace",
+    "crates/rev",
+    "crates/slug",
+    "crates/between",
+    "crates/sub",
+    "crates/nth",
+    "crates/match",
+    "crates/matchall",
+    "crates/count",
+    "crates/split",
+    "crates/chars",
+    "crates/lines",
+    "crates/uniq",
+    "crates/pad",
+    "crates/rpad",
+    "crates/repeat",
+    "crates/hash",
+    "crates/b64",
+    "crates/hex",
+    "crates/join",
+    "crates/fetch",
+]
+resolver = "3"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+description = "31 string commands for your terminal. No flags. No ceremony."
+repository = "https://github.com/your-username/qk-str"
+
+[workspace.dependencies]
+qk-common = { path = "crates/qk-common" }
+regex = "1"
+sha2 = "0.10"
+base64 = "0.22"
+ureq = "2"

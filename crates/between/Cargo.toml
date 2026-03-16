@@ -1,0 +1,9 @@
+[package]
+name = "between"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "qk-str: between command"
+
+[dependencies]
+qk-common.workspace = true

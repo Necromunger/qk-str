@@ -1,0 +1,9 @@
+[package]
+name = "contains"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "qk-str: contains command"
+
+[dependencies]
+qk-common.workspace = true
