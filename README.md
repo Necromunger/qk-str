@@ -79,6 +79,9 @@ qk isnum "42.5" && echo "it's a number"
 | b64 | `qk b64 "hello"` | `aGVsbG8=` |
 | hex | `qk hex "AB"` | `4142` |
 | fetch | `qk fetch "https://example.com"` | HTTP GET body |
+| urlencode | `qk urlencode "hello world"` | `hello%20world` |
+| urldecode | `qk urldecode "hello%20world"` | `hello world` |
+| ascii | `qk ascii "café"` | `caf` |
 
 ## License
 

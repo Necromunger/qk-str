@@ -1,3 +1,4 @@
+pub mod ascii;
 pub mod b64;
 pub mod between;
 pub mod chars;
@@ -29,3 +30,5 @@ pub mod sub;
 pub mod trim;
 pub mod uniq;
 pub mod upper;
+pub mod urldecode;
+pub mod urlencode;

@@ -9,7 +9,8 @@ fn main() {
         eprintln!("Usage: qk <command> [args...]");
         eprintln!("Commands: eq, contains, starts, ends, empty, isnum, len, trim, upper, lower,");
         eprintln!("  replace, rev, slug, between, sub, nth, match, matchall, count, split, chars,");
-        eprintln!("  lines, uniq, pad, rpad, repeat, hash, b64, hex, join, fetch");
+        eprintln!("  lines, uniq, pad, rpad, repeat, hash, b64, hex, join, fetch, urlencode,");
+        eprintln!("  urldecode, ascii");
         std::process::exit(2);
     }
 
@@ -27,8 +28,9 @@ fn main() {
         eprintln!("  slug, between, sub, nth, match, matchall   Extract");
         eprintln!("  count, split, chars, lines, uniq            Split/count");
         eprintln!("  pad, rpad, repeat                           Format");
-        eprintln!("  hash, b64, hex                              Encode");
+        eprintln!("  hash, b64, hex, urlencode, urldecode         Encode");
         eprintln!("  join, fetch                                 IO");
+        eprintln!("  ascii                                        Sanitize");
         std::process::exit(0);
     }
 
@@ -66,6 +68,9 @@ fn main() {
             "hex" => cmd::hex::USAGE,
             "join" => cmd::join::USAGE,
             "fetch" => cmd::fetch::USAGE,
+            "urlencode" => cmd::urlencode::USAGE,
+            "urldecode" => cmd::urldecode::USAGE,
+            "ascii" => cmd::ascii::USAGE,
             _ => {
                 eprintln!("unknown command: {subcommand}");
                 std::process::exit(2);
@@ -107,6 +112,9 @@ fn main() {
         "hex" => cmd::hex::run(sub_args),
         "join" => cmd::join::run(sub_args),
         "fetch" => cmd::fetch::run(sub_args),
+        "urlencode" => cmd::urlencode::run(sub_args),
+        "urldecode" => cmd::urldecode::run(sub_args),
+        "ascii" => cmd::ascii::run(sub_args),
         _ => {
             eprintln!("unknown command: {subcommand}");
             std::process::exit(2);

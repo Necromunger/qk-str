@@ -356,6 +356,69 @@ fn join_space() {
     assert_eq!(stdout(&pipe_to("join", &[" "], "x\ny\nz")), "x y z");
 }
 
+#[test]
+fn urlencode_basic() {
+    assert_eq!(stdout(&run("urlencode", &["hello world"])), "hello%20world");
+}
+
+#[test]
+fn urlencode_special() {
+    assert_eq!(
+        stdout(&run("urlencode", &["foo=bar&baz"])),
+        "foo%3Dbar%26baz"
+    );
+}
+
+#[test]
+fn urlencode_stdin() {
+    assert_eq!(
+        stdout(&pipe_to("urlencode", &[], "hello world")),
+        "hello%20world"
+    );
+}
+
+#[test]
+fn urldecode_basic() {
+    assert_eq!(stdout(&run("urldecode", &["hello%20world"])), "hello world");
+}
+
+#[test]
+fn urldecode_plus() {
+    assert_eq!(stdout(&run("urldecode", &["hello+world"])), "hello world");
+}
+
+#[test]
+fn urldecode_stdin() {
+    assert_eq!(stdout(&pipe_to("urldecode", &[], "foo%3Dbar")), "foo=bar");
+}
+
+#[test]
+fn urldecode_invalid() {
+    assert_eq!(run("urldecode", &["%ZZ"]).status.code(), Some(2));
+}
+
+#[test]
+fn ascii_basic() {
+    assert_eq!(stdout(&run("ascii", &["café"])), "caf");
+}
+
+#[test]
+fn ascii_all_ascii() {
+    assert_eq!(stdout(&run("ascii", &["hello"])), "hello");
+}
+
+#[test]
+fn ascii_stdin() {
+    assert_eq!(stdout(&pipe_to("ascii", &[], "héllo")), "hllo");
+}
+
+#[test]
+fn pipe_urlencode_roundtrip() {
+    let encoded = stdout(&run("urlencode", &["hello world & more"]));
+    let decoded = pipe_to("urldecode", &[], &encoded);
+    assert_eq!(stdout(&decoded), "hello world & more");
+}
+
 // ──────────────────────────────────────────────
 // Pipe chain tests
 // ──────────────────────────────────────────────
