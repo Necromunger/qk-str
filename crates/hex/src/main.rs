@@ -5,13 +5,13 @@ fn main() {
     let decode = args.first().map(|s| s == "-d").unwrap_or(false);
 
     if decode {
-        let (s, _) = resolve_context(&args[1..], 1).unwrap_or_else(|_| exit_err("missing argument"));
+        let (s, _) = resolve_context(&args[1..], 1).unwrap_or_else(|| exit_err("missing argument"));
         match hex_decode(&s) {
             Some(text) => out(&text),
             None => exit_err("invalid hex string"),
         }
     } else {
-        let (s, _) = resolve_context(&args, 1).unwrap_or_else(|_| exit_err("missing argument"));
+        let (s, _) = resolve_context(&args, 1).unwrap_or_else(|| exit_err("missing argument"));
         out(&hex_encode(&s));
     }
 }
@@ -21,7 +21,7 @@ fn hex_encode(s: &str) -> String {
 }
 
 fn hex_decode(s: &str) -> Option<String> {
-    if s.len() % 2 != 0 {
+    if !s.len().is_multiple_of(2) {
         return None;
     }
     let bytes: Result<Vec<u8>, _> = (0..s.len())
@@ -33,13 +33,17 @@ fn hex_decode(s: &str) -> Option<String> {
 
 #[cfg(test)]
 mod tests {
-    use super::{hex_encode, hex_decode};
+    use super::{hex_decode, hex_encode};
 
     #[test]
-    fn encode() { assert_eq!(hex_encode("AB"), "4142"); }
+    fn encode() {
+        assert_eq!(hex_encode("AB"), "4142");
+    }
 
     #[test]
-    fn decode() { assert_eq!(hex_decode("4142"), Some("AB".to_string())); }
+    fn decode() {
+        assert_eq!(hex_decode("4142"), Some("AB".to_string()));
+    }
 
     #[test]
     fn roundtrip() {
@@ -48,8 +52,12 @@ mod tests {
     }
 
     #[test]
-    fn empty() { assert_eq!(hex_encode(""), ""); }
+    fn empty() {
+        assert_eq!(hex_encode(""), "");
+    }
 
     #[test]
-    fn odd_length_decode() { assert_eq!(hex_decode("414"), None); }
+    fn odd_length_decode() {
+        assert_eq!(hex_decode("414"), None);
+    }
 }

@@ -35,14 +35,11 @@ fn trim_trailing_newline(mut s: String) -> String {
 /// `expected` is the total number of positional args the tool expects.
 /// If `args.len() >= expected`, context comes from args[0] and params start at index 1.
 /// If `args.len() == expected - 1`, stdin replaces context and params start at index 0.
-pub fn resolve_context(args: &[String], expected: usize) -> Result<(String, usize), ()> {
+pub fn resolve_context(args: &[String], expected: usize) -> Option<(String, usize)> {
     if args.len() >= expected {
-        Ok((args[0].clone(), 1))
+        Some((args[0].clone(), 1))
     } else {
-        match read_stdin() {
-            Some(s) => Ok((trim_trailing_newline(s), 0)),
-            None => Err(()),
-        }
+        read_stdin().map(|s| (trim_trailing_newline(s), 0))
     }
 }
 

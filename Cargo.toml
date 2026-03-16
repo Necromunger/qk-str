@@ -47,7 +47,7 @@ version = "0.1.0"
 edition = "2024"
 license = "MIT"
 description = "31 string commands for your terminal. No flags. No ceremony."
-repository = "https://github.com/your-username/qk-str"
+repository = "https://github.com/Necromunger/qk-str"
 
 [workspace.dependencies]
 qk-common = { path = "crates/qk-common" }

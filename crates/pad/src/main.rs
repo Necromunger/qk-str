@@ -17,8 +17,9 @@ fn left_pad(s: &str, width: usize, fill: &str) -> String {
 
 fn main() {
     let args = init("pad <string> <width> [fill] — left-pad to width");
-    let (s, off) = resolve_context(&args, 2).unwrap_or_else(|_| exit_err("missing argument"));
-    let width: usize = args.get(off)
+    let (s, off) = resolve_context(&args, 2).unwrap_or_else(|| exit_err("missing argument"));
+    let width: usize = args
+        .get(off)
         .unwrap_or_else(|| exit_err("missing <width>"))
         .parse()
         .unwrap_or_else(|_| exit_err("invalid width"));
@@ -32,14 +33,22 @@ mod tests {
     use super::left_pad;
 
     #[test]
-    fn basic() { assert_eq!(left_pad("42", 5, "0"), "00042"); }
+    fn basic() {
+        assert_eq!(left_pad("42", 5, "0"), "00042");
+    }
 
     #[test]
-    fn default_space() { assert_eq!(left_pad("hi", 5, " "), "   hi"); }
+    fn default_space() {
+        assert_eq!(left_pad("hi", 5, " "), "   hi");
+    }
 
     #[test]
-    fn no_pad_needed() { assert_eq!(left_pad("hello", 3, " "), "hello"); }
+    fn no_pad_needed() {
+        assert_eq!(left_pad("hello", 3, " "), "hello");
+    }
 
     #[test]
-    fn exact_width() { assert_eq!(left_pad("abc", 3, " "), "abc"); }
+    fn exact_width() {
+        assert_eq!(left_pad("abc", 3, " "), "abc");
+    }
 }

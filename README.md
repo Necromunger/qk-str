@@ -8,7 +8,7 @@
 cargo install qk-str
 ```
 
-Or grab a binary from [GitHub Releases](https://github.com/anthropics/qk-str/releases).
+Or grab a binary from [GitHub Releases](https://github.com/Necromunger/qk-str/releases).
 
 ## How it works
 

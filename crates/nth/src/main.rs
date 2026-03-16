@@ -2,9 +2,12 @@ use qk_common::{exit_err, init, out, resolve_context};
 
 fn main() {
     let args = init("nth <string> <delimiter> <index> — get nth element (0-indexed)");
-    let (s, off) = resolve_context(&args, 3).unwrap_or_else(|_| exit_err("missing argument"));
-    let delim = args.get(off).unwrap_or_else(|| exit_err("missing <delimiter>"));
-    let index: usize = args.get(off + 1)
+    let (s, off) = resolve_context(&args, 3).unwrap_or_else(|| exit_err("missing argument"));
+    let delim = args
+        .get(off)
+        .unwrap_or_else(|| exit_err("missing <delimiter>"));
+    let index: usize = args
+        .get(off + 1)
         .unwrap_or_else(|| exit_err("missing <index>"))
         .parse()
         .unwrap_or_else(|_| exit_err("invalid index"));
@@ -23,14 +26,22 @@ mod tests {
     }
 
     #[test]
-    fn basic() { assert_eq!(nth("a,b,c", ",", 1).unwrap(), "b"); }
+    fn basic() {
+        assert_eq!(nth("a,b,c", ",", 1).unwrap(), "b");
+    }
 
     #[test]
-    fn first() { assert_eq!(nth("a,b,c", ",", 0).unwrap(), "a"); }
+    fn first() {
+        assert_eq!(nth("a,b,c", ",", 0).unwrap(), "a");
+    }
 
     #[test]
-    fn last() { assert_eq!(nth("a,b,c", ",", 2).unwrap(), "c"); }
+    fn last() {
+        assert_eq!(nth("a,b,c", ",", 2).unwrap(), "c");
+    }
 
     #[test]
-    fn out_of_bounds() { assert!(nth("a,b", ",", 5).is_none()); }
+    fn out_of_bounds() {
+        assert!(nth("a,b", ",", 5).is_none());
+    }
 }

@@ -14,7 +14,7 @@ fn dedup_chars(s: &str) -> String {
 
 fn main() {
     let args = init("uniq <string> — deduplicate characters (preserving order)");
-    let (s, _) = resolve_context(&args, 1).unwrap_or_else(|_| exit_err("missing argument"));
+    let (s, _) = resolve_context(&args, 1).unwrap_or_else(|| exit_err("missing argument"));
     out(&dedup_chars(&s));
 }
 
@@ -23,14 +23,22 @@ mod tests {
     use super::dedup_chars;
 
     #[test]
-    fn basic() { assert_eq!(dedup_chars("abcabc"), "abc"); }
+    fn basic() {
+        assert_eq!(dedup_chars("abcabc"), "abc");
+    }
 
     #[test]
-    fn no_dupes() { assert_eq!(dedup_chars("abc"), "abc"); }
+    fn no_dupes() {
+        assert_eq!(dedup_chars("abc"), "abc");
+    }
 
     #[test]
-    fn empty() { assert_eq!(dedup_chars(""), ""); }
+    fn empty() {
+        assert_eq!(dedup_chars(""), "");
+    }
 
     #[test]
-    fn preserves_order() { assert_eq!(dedup_chars("banana"), "ban"); }
+    fn preserves_order() {
+        assert_eq!(dedup_chars("banana"), "ban");
+    }
 }

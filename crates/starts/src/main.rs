@@ -2,7 +2,7 @@ use qk_common::{exit_bool, exit_err, init, resolve_context};
 
 fn main() {
     let args = init("starts <string> <prefix> — exit 0 if string starts with prefix");
-    let (s, off) = resolve_context(&args, 2).unwrap_or_else(|_| exit_err("missing argument"));
+    let (s, off) = resolve_context(&args, 2).unwrap_or_else(|| exit_err("missing argument"));
     let prefix = args.get(off).unwrap_or_else(|| exit_err("missing prefix"));
     exit_bool(s.starts_with(prefix.as_str()));
 }
@@ -10,14 +10,22 @@ fn main() {
 #[cfg(test)]
 mod tests {
     #[test]
-    fn matches() { assert!("hello".starts_with("hel")); }
+    fn matches() {
+        assert!("hello".starts_with("hel"));
+    }
 
     #[test]
-    fn no_match() { assert!(!"hello".starts_with("xyz")); }
+    fn no_match() {
+        assert!(!"hello".starts_with("xyz"));
+    }
 
     #[test]
-    fn empty_prefix() { assert!("hello".starts_with("")); }
+    fn empty_prefix() {
+        assert!("hello".starts_with(""));
+    }
 
     #[test]
-    fn full_string() { assert!("hello".starts_with("hello")); }
+    fn full_string() {
+        assert!("hello".starts_with("hello"));
+    }
 }

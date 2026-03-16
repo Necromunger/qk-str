@@ -10,10 +10,10 @@
 ## Remaining
 
 ### Ship it
-- [ ] Add .gitignore
-- [ ] Write README.md with tool table, install instructions, pipe examples
-- [ ] Set up GitHub Actions CI (test/clippy/fmt on 3 platforms + release builds)
-- [ ] Register `qk-str` on crates.io (cargo publish placeholder 0.0.1)
+- [x] Add .gitignore
+- [x] Write README.md with tool table, install instructions, pipe examples
+- [x] Set up GitHub Actions CI (dev/main split, main auto-publishes)
+- [ ] Push to GitHub, verify CI passes, merge dev → main to trigger first publish
 
 ### Pipe to clipboard
 Consider how to pipe commands output directly into clipboard

@@ -6,7 +6,7 @@ fn main() {
     let decode = args.first().map(|s| s == "-d").unwrap_or(false);
 
     if decode {
-        let (s, _) = resolve_context(&args[1..], 1).unwrap_or_else(|_| exit_err("missing argument"));
+        let (s, _) = resolve_context(&args[1..], 1).unwrap_or_else(|| exit_err("missing argument"));
         match STANDARD.decode(s.as_bytes()) {
             Ok(bytes) => match String::from_utf8(bytes) {
                 Ok(text) => out(&text),
@@ -15,7 +15,7 @@ fn main() {
             Err(_) => exit_err("invalid base64"),
         }
     } else {
-        let (s, _) = resolve_context(&args, 1).unwrap_or_else(|_| exit_err("missing argument"));
+        let (s, _) = resolve_context(&args, 1).unwrap_or_else(|| exit_err("missing argument"));
         out(&STANDARD.encode(s.as_bytes()));
     }
 }
@@ -25,7 +25,9 @@ mod tests {
     use base64::{Engine, engine::general_purpose::STANDARD};
 
     #[test]
-    fn encode() { assert_eq!(STANDARD.encode("hello"), "aGVsbG8="); }
+    fn encode() {
+        assert_eq!(STANDARD.encode("hello"), "aGVsbG8=");
+    }
 
     #[test]
     fn decode() {
@@ -41,5 +43,7 @@ mod tests {
     }
 
     #[test]
-    fn empty() { assert_eq!(STANDARD.encode(""), ""); }
+    fn empty() {
+        assert_eq!(STANDARD.encode(""), "");
+    }
 }

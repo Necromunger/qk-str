@@ -2,7 +2,7 @@ use qk_common::{exit_err, init, out, resolve_context};
 
 fn main() {
     let args = init("fetch <url> — HTTP GET, body to stdout");
-    let (url, _) = resolve_context(&args, 1).unwrap_or_else(|_| exit_err("missing <url>"));
+    let (url, _) = resolve_context(&args, 1).unwrap_or_else(|| exit_err("missing <url>"));
 
     match ureq::get(&url).call() {
         Ok(response) => match response.into_string() {

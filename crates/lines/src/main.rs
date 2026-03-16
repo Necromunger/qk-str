@@ -35,14 +35,22 @@ mod tests {
     use super::*;
 
     #[test]
-    fn empty() { assert_eq!(count_lines(""), 0); }
+    fn empty() {
+        assert_eq!(count_lines(""), 0);
+    }
 
     #[test]
-    fn one_line() { assert_eq!(count_lines("hello"), 1); }
+    fn one_line() {
+        assert_eq!(count_lines("hello"), 1);
+    }
 
     #[test]
-    fn multiple() { assert_eq!(count_lines("a\nb\nc"), 3); }
+    fn multiple() {
+        assert_eq!(count_lines("a\nb\nc"), 3);
+    }
 
     #[test]
-    fn trailing_newline() { assert_eq!(count_lines("a\nb\n"), 2); }
+    fn trailing_newline() {
+        assert_eq!(count_lines("a\nb\n"), 2);
+    }
 }

@@ -3,7 +3,9 @@ use std::io::Read;
 
 fn main() {
     let args = init("join <delimiter> — join stdin lines with delimiter");
-    let delim = args.first().unwrap_or_else(|| exit_err("missing <delimiter>"));
+    let delim = args
+        .first()
+        .unwrap_or_else(|| exit_err("missing <delimiter>"));
 
     let mut buf = String::new();
     if std::io::stdin().read_to_string(&mut buf).is_err() {
@@ -22,14 +24,22 @@ mod tests {
     }
 
     #[test]
-    fn basic() { assert_eq!(join_lines("a\nb\nc", ","), "a,b,c"); }
+    fn basic() {
+        assert_eq!(join_lines("a\nb\nc", ","), "a,b,c");
+    }
 
     #[test]
-    fn single_line() { assert_eq!(join_lines("hello", ","), "hello"); }
+    fn single_line() {
+        assert_eq!(join_lines("hello", ","), "hello");
+    }
 
     #[test]
-    fn empty_delimiter() { assert_eq!(join_lines("a\nb\nc", ""), "abc"); }
+    fn empty_delimiter() {
+        assert_eq!(join_lines("a\nb\nc", ""), "abc");
+    }
 
     #[test]
-    fn trailing_newline() { assert_eq!(join_lines("a\nb\nc\n", ","), "a,b,c"); }
+    fn trailing_newline() {
+        assert_eq!(join_lines("a\nb\nc\n", ","), "a,b,c");
+    }
 }

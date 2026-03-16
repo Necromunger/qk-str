@@ -2,7 +2,7 @@ use qk_common::{exit_err, init, out, resolve_context};
 
 fn main() {
     let args = init("slug <string> — slugify the string");
-    let (s, _) = resolve_context(&args, 1).unwrap_or_else(|_| exit_err("missing argument"));
+    let (s, _) = resolve_context(&args, 1).unwrap_or_else(|| exit_err("missing argument"));
     out(&slugify(&s));
 }
 
@@ -30,17 +30,27 @@ mod tests {
     use super::slugify;
 
     #[test]
-    fn basic() { assert_eq!(slugify("Hello World!"), "hello-world"); }
+    fn basic() {
+        assert_eq!(slugify("Hello World!"), "hello-world");
+    }
 
     #[test]
-    fn multiple_spaces() { assert_eq!(slugify("a  b  c"), "a-b-c"); }
+    fn multiple_spaces() {
+        assert_eq!(slugify("a  b  c"), "a-b-c");
+    }
 
     #[test]
-    fn special_chars() { assert_eq!(slugify("foo@bar#baz"), "foo-bar-baz"); }
+    fn special_chars() {
+        assert_eq!(slugify("foo@bar#baz"), "foo-bar-baz");
+    }
 
     #[test]
-    fn empty() { assert_eq!(slugify(""), ""); }
+    fn empty() {
+        assert_eq!(slugify(""), "");
+    }
 
     #[test]
-    fn already_slug() { assert_eq!(slugify("hello-world"), "hello-world"); }
+    fn already_slug() {
+        assert_eq!(slugify("hello-world"), "hello-world");
+    }
 }

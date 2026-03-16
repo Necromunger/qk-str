@@ -14,7 +14,10 @@ fn run(name: &str, args: &[&str]) -> Output {
 }
 
 fn stdout(o: &Output) -> String {
-    String::from_utf8(o.stdout.clone()).unwrap().trim_end().to_string()
+    String::from_utf8(o.stdout.clone())
+        .unwrap()
+        .trim_end()
+        .to_string()
 }
 
 fn pipe_to(name: &str, args: &[&str], input: &str) -> Output {
@@ -25,7 +28,12 @@ fn pipe_to(name: &str, args: &[&str], input: &str) -> Output {
         .stderr(Stdio::piped())
         .spawn()
         .unwrap();
-    child.stdin.take().unwrap().write_all(input.as_bytes()).unwrap();
+    child
+        .stdin
+        .take()
+        .unwrap()
+        .write_all(input.as_bytes())
+        .unwrap();
     child.wait_with_output().unwrap()
 }
 
@@ -34,125 +42,213 @@ fn pipe_to(name: &str, args: &[&str], input: &str) -> Output {
 // ──────────────────────────────────────────────
 
 #[test]
-fn eq_true() { assert!(run("eq", &["abc", "abc"]).status.success()); }
+fn eq_true() {
+    assert!(run("eq", &["abc", "abc"]).status.success());
+}
 
 #[test]
-fn eq_false() { assert_eq!(run("eq", &["abc", "xyz"]).status.code(), Some(1)); }
+fn eq_false() {
+    assert_eq!(run("eq", &["abc", "xyz"]).status.code(), Some(1));
+}
 
 #[test]
-fn eq_stdin() { assert!(pipe_to("eq", &["hello"], "hello").status.success()); }
+fn eq_stdin() {
+    assert!(pipe_to("eq", &["hello"], "hello").status.success());
+}
 
 #[test]
-fn contains_true() { assert!(run("contains", &["hello world", "world"]).status.success()); }
+fn contains_true() {
+    assert!(run("contains", &["hello world", "world"]).status.success());
+}
 
 #[test]
-fn contains_false() { assert_eq!(run("contains", &["hello", "xyz"]).status.code(), Some(1)); }
+fn contains_false() {
+    assert_eq!(run("contains", &["hello", "xyz"]).status.code(), Some(1));
+}
 
 #[test]
-fn contains_stdin() { assert!(pipe_to("contains", &["world"], "hello world").status.success()); }
+fn contains_stdin() {
+    assert!(
+        pipe_to("contains", &["world"], "hello world")
+            .status
+            .success()
+    );
+}
 
 #[test]
-fn starts_true() { assert!(run("starts", &["hello", "hel"]).status.success()); }
+fn starts_true() {
+    assert!(run("starts", &["hello", "hel"]).status.success());
+}
 
 #[test]
-fn starts_false() { assert_eq!(run("starts", &["hello", "xyz"]).status.code(), Some(1)); }
+fn starts_false() {
+    assert_eq!(run("starts", &["hello", "xyz"]).status.code(), Some(1));
+}
 
 #[test]
-fn starts_stdin() { assert!(pipe_to("starts", &["hel"], "hello").status.success()); }
+fn starts_stdin() {
+    assert!(pipe_to("starts", &["hel"], "hello").status.success());
+}
 
 #[test]
-fn ends_true() { assert!(run("ends", &["file.txt", ".txt"]).status.success()); }
+fn ends_true() {
+    assert!(run("ends", &["file.txt", ".txt"]).status.success());
+}
 
 #[test]
-fn ends_false() { assert_eq!(run("ends", &["file.txt", ".rs"]).status.code(), Some(1)); }
+fn ends_false() {
+    assert_eq!(run("ends", &["file.txt", ".rs"]).status.code(), Some(1));
+}
 
 #[test]
-fn ends_stdin() { assert!(pipe_to("ends", &[".txt"], "file.txt").status.success()); }
+fn ends_stdin() {
+    assert!(pipe_to("ends", &[".txt"], "file.txt").status.success());
+}
 
 #[test]
-fn empty_true() { assert!(run("empty", &[""]).status.success()); }
+fn empty_true() {
+    assert!(run("empty", &[""]).status.success());
+}
 
 #[test]
-fn empty_false() { assert_eq!(run("empty", &["hi"]).status.code(), Some(1)); }
+fn empty_false() {
+    assert_eq!(run("empty", &["hi"]).status.code(), Some(1));
+}
 
 #[test]
-fn isnum_int() { assert!(run("isnum", &["42"]).status.success()); }
+fn isnum_int() {
+    assert!(run("isnum", &["42"]).status.success());
+}
 
 #[test]
-fn isnum_float() { assert!(run("isnum", &["3.14"]).status.success()); }
+fn isnum_float() {
+    assert!(run("isnum", &["3.14"]).status.success());
+}
 
 #[test]
-fn isnum_not() { assert_eq!(run("isnum", &["abc"]).status.code(), Some(1)); }
+fn isnum_not() {
+    assert_eq!(run("isnum", &["abc"]).status.code(), Some(1));
+}
 
 #[test]
-fn isnum_stdin() { assert!(pipe_to("isnum", &[], "42").status.success()); }
+fn isnum_stdin() {
+    assert!(pipe_to("isnum", &[], "42").status.success());
+}
 
 // ──────────────────────────────────────────────
 // Output tools
 // ──────────────────────────────────────────────
 
 #[test]
-fn len_basic() { assert_eq!(stdout(&run("len", &["hello"])), "5"); }
+fn len_basic() {
+    assert_eq!(stdout(&run("len", &["hello"])), "5");
+}
 
 #[test]
-fn len_unicode() { assert_eq!(stdout(&run("len", &["café"])), "4"); }
+fn len_unicode() {
+    assert_eq!(stdout(&run("len", &["café"])), "4");
+}
 
 #[test]
-fn len_stdin() { assert_eq!(stdout(&pipe_to("len", &[], "hello")), "5"); }
+fn len_stdin() {
+    assert_eq!(stdout(&pipe_to("len", &[], "hello")), "5");
+}
 
 #[test]
-fn trim_basic() { assert_eq!(stdout(&run("trim", &["  hi  "])), "hi"); }
+fn trim_basic() {
+    assert_eq!(stdout(&run("trim", &["  hi  "])), "hi");
+}
 
 #[test]
-fn trim_stdin() { assert_eq!(stdout(&pipe_to("trim", &[], "  hi  ")), "hi"); }
+fn trim_stdin() {
+    assert_eq!(stdout(&pipe_to("trim", &[], "  hi  ")), "hi");
+}
 
 #[test]
-fn upper_basic() { assert_eq!(stdout(&run("upper", &["hello"])), "HELLO"); }
+fn upper_basic() {
+    assert_eq!(stdout(&run("upper", &["hello"])), "HELLO");
+}
 
 #[test]
-fn upper_stdin() { assert_eq!(stdout(&pipe_to("upper", &[], "hello")), "HELLO"); }
+fn upper_stdin() {
+    assert_eq!(stdout(&pipe_to("upper", &[], "hello")), "HELLO");
+}
 
 #[test]
-fn lower_basic() { assert_eq!(stdout(&run("lower", &["HELLO"])), "hello"); }
+fn lower_basic() {
+    assert_eq!(stdout(&run("lower", &["HELLO"])), "hello");
+}
 
 #[test]
-fn lower_stdin() { assert_eq!(stdout(&pipe_to("lower", &[], "HELLO")), "hello"); }
+fn lower_stdin() {
+    assert_eq!(stdout(&pipe_to("lower", &[], "HELLO")), "hello");
+}
 
 #[test]
-fn replace_basic() { assert_eq!(stdout(&run("replace", &["foo bar", "foo", "baz"])), "baz bar"); }
+fn replace_basic() {
+    assert_eq!(
+        stdout(&run("replace", &["foo bar", "foo", "baz"])),
+        "baz bar"
+    );
+}
 
 #[test]
-fn replace_stdin() { assert_eq!(stdout(&pipe_to("replace", &["foo", "baz"], "foo bar")), "baz bar"); }
+fn replace_stdin() {
+    assert_eq!(
+        stdout(&pipe_to("replace", &["foo", "baz"], "foo bar")),
+        "baz bar"
+    );
+}
 
 #[test]
-fn rev_basic() { assert_eq!(stdout(&run("rev", &["hello"])), "olleh"); }
+fn rev_basic() {
+    assert_eq!(stdout(&run("rev", &["hello"])), "olleh");
+}
 
 #[test]
-fn rev_stdin() { assert_eq!(stdout(&pipe_to("rev", &[], "hello")), "olleh"); }
+fn rev_stdin() {
+    assert_eq!(stdout(&pipe_to("rev", &[], "hello")), "olleh");
+}
 
 #[test]
-fn slug_basic() { assert_eq!(stdout(&run("slug", &["Hello World!"])), "hello-world"); }
+fn slug_basic() {
+    assert_eq!(stdout(&run("slug", &["Hello World!"])), "hello-world");
+}
 
 #[test]
-fn slug_stdin() { assert_eq!(stdout(&pipe_to("slug", &[], "Hello World!")), "hello-world"); }
+fn slug_stdin() {
+    assert_eq!(stdout(&pipe_to("slug", &[], "Hello World!")), "hello-world");
+}
 
 #[test]
-fn between_basic() { assert_eq!(stdout(&run("between", &["a[b]c", "[", "]"])), "b"); }
+fn between_basic() {
+    assert_eq!(stdout(&run("between", &["a[b]c", "[", "]"])), "b");
+}
 
 #[test]
-fn between_no_match() { assert_eq!(run("between", &["abc", "x", "y"]).status.code(), Some(2)); }
+fn between_no_match() {
+    assert_eq!(run("between", &["abc", "x", "y"]).status.code(), Some(2));
+}
 
 #[test]
-fn sub_basic() { assert_eq!(stdout(&run("sub", &["hello world", "6", "5"])), "world"); }
+fn sub_basic() {
+    assert_eq!(stdout(&run("sub", &["hello world", "6", "5"])), "world");
+}
 
 #[test]
-fn sub_stdin() { assert_eq!(stdout(&pipe_to("sub", &["6", "5"], "hello world")), "world"); }
+fn sub_stdin() {
+    assert_eq!(stdout(&pipe_to("sub", &["6", "5"], "hello world")), "world");
+}
 
 #[test]
-fn nth_basic() { assert_eq!(stdout(&run("nth", &["a,b,c", ",", "1"])), "b"); }
+fn nth_basic() {
+    assert_eq!(stdout(&run("nth", &["a,b,c", ",", "1"])), "b");
+}
 
 #[test]
-fn nth_out_of_bounds() { assert_eq!(run("nth", &["a,b", ",", "5"]).status.code(), Some(2)); }
+fn nth_out_of_bounds() {
+    assert_eq!(run("nth", &["a,b", ",", "5"]).status.code(), Some(2));
+}
 
 #[test]
 fn match_found() {
@@ -162,34 +258,54 @@ fn match_found() {
 }
 
 #[test]
-fn match_not_found() { assert_eq!(run("match", &["hello", r"\d+"]).status.code(), Some(1)); }
+fn match_not_found() {
+    assert_eq!(run("match", &["hello", r"\d+"]).status.code(), Some(1));
+}
 
 #[test]
-fn matchall_basic() { assert_eq!(stdout(&run("matchall", &["a1b2c3", r"\d"])), "1\n2\n3"); }
+fn matchall_basic() {
+    assert_eq!(stdout(&run("matchall", &["a1b2c3", r"\d"])), "1\n2\n3");
+}
 
 #[test]
-fn count_basic() { assert_eq!(stdout(&run("count", &["abab", "ab"])), "2"); }
+fn count_basic() {
+    assert_eq!(stdout(&run("count", &["abab", "ab"])), "2");
+}
 
 #[test]
-fn split_basic() { assert_eq!(stdout(&run("split", &["a,b,c", ","])), "a\nb\nc"); }
+fn split_basic() {
+    assert_eq!(stdout(&run("split", &["a,b,c", ","])), "a\nb\nc");
+}
 
 #[test]
-fn chars_basic() { assert_eq!(stdout(&run("chars", &["hello"])), "h\ne\nl\nl\no"); }
+fn chars_basic() {
+    assert_eq!(stdout(&run("chars", &["hello"])), "h\ne\nl\nl\no");
+}
 
 #[test]
-fn lines_stdin() { assert_eq!(stdout(&pipe_to("lines", &[], "a\nb\nc")), "3"); }
+fn lines_stdin() {
+    assert_eq!(stdout(&pipe_to("lines", &[], "a\nb\nc")), "3");
+}
 
 #[test]
-fn uniq_basic() { assert_eq!(stdout(&run("uniq", &["abcabc"])), "abc"); }
+fn uniq_basic() {
+    assert_eq!(stdout(&run("uniq", &["abcabc"])), "abc");
+}
 
 #[test]
-fn pad_basic() { assert_eq!(stdout(&run("pad", &["42", "5", "0"])), "00042"); }
+fn pad_basic() {
+    assert_eq!(stdout(&run("pad", &["42", "5", "0"])), "00042");
+}
 
 #[test]
-fn rpad_basic() { assert_eq!(stdout(&run("rpad", &["hi", "5", "."])), "hi..."); }
+fn rpad_basic() {
+    assert_eq!(stdout(&run("rpad", &["hi", "5", "."])), "hi...");
+}
 
 #[test]
-fn repeat_basic() { assert_eq!(stdout(&run("repeat", &["ab", "3"])), "ababab"); }
+fn repeat_basic() {
+    assert_eq!(stdout(&run("repeat", &["ab", "3"])), "ababab");
+}
 
 #[test]
 fn hash_basic() {
@@ -200,25 +316,39 @@ fn hash_basic() {
 }
 
 #[test]
-fn b64_encode() { assert_eq!(stdout(&run("b64", &["hello"])), "aGVsbG8="); }
+fn b64_encode() {
+    assert_eq!(stdout(&run("b64", &["hello"])), "aGVsbG8=");
+}
 
 #[test]
-fn b64_decode() { assert_eq!(stdout(&run("b64", &["-d", "aGVsbG8="])), "hello"); }
+fn b64_decode() {
+    assert_eq!(stdout(&run("b64", &["-d", "aGVsbG8="])), "hello");
+}
 
 #[test]
-fn b64_stdin() { assert_eq!(stdout(&pipe_to("b64", &[], "hello")), "aGVsbG8="); }
+fn b64_stdin() {
+    assert_eq!(stdout(&pipe_to("b64", &[], "hello")), "aGVsbG8=");
+}
 
 #[test]
-fn hex_encode() { assert_eq!(stdout(&run("hex", &["AB"])), "4142"); }
+fn hex_encode() {
+    assert_eq!(stdout(&run("hex", &["AB"])), "4142");
+}
 
 #[test]
-fn hex_decode() { assert_eq!(stdout(&run("hex", &["-d", "4142"])), "AB"); }
+fn hex_decode() {
+    assert_eq!(stdout(&run("hex", &["-d", "4142"])), "AB");
+}
 
 #[test]
-fn join_basic() { assert_eq!(stdout(&pipe_to("join", &[","], "a\nb\nc\n")), "a,b,c"); }
+fn join_basic() {
+    assert_eq!(stdout(&pipe_to("join", &[","], "a\nb\nc\n")), "a,b,c");
+}
 
 #[test]
-fn join_space() { assert_eq!(stdout(&pipe_to("join", &[" "], "x\ny\nz")), "x y z"); }
+fn join_space() {
+    assert_eq!(stdout(&pipe_to("join", &[" "], "x\ny\nz")), "x y z");
+}
 
 // ──────────────────────────────────────────────
 // Pipe chain tests
@@ -297,7 +427,11 @@ fn help_flag() {
 // ──────────────────────────────────────────────
 
 #[test]
-fn match_invalid_regex() { assert_eq!(run("match", &["abc", "["]).status.code(), Some(2)); }
+fn match_invalid_regex() {
+    assert_eq!(run("match", &["abc", "["]).status.code(), Some(2));
+}
 
 #[test]
-fn sub_invalid_offset() { assert_eq!(run("sub", &["hi", "abc", "1"]).status.code(), Some(2)); }
+fn sub_invalid_offset() {
+    assert_eq!(run("sub", &["hi", "abc", "1"]).status.code(), Some(2));
+}
