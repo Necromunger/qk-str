@@ -5,7 +5,11 @@ fn bin(name: &str) -> Command {
     let mut path = std::path::PathBuf::from(env!("CARGO_MANIFEST_DIR"));
     path.push("target");
     path.push("debug");
-    path.push(name);
+    if cfg!(windows) {
+        path.push(format!("{name}.exe"));
+    } else {
+        path.push(name);
+    }
     Command::new(path)
 }
 
