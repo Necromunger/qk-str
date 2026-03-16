@@ -15,17 +15,6 @@
 - [x] Set up GitHub Actions CI (dev/main split, main auto-publishes)
 - [ ] Push to GitHub, verify CI passes, merge dev → main to trigger first publish
 
-### Pipe to clipboard
-Consider how to pipe commands output directly into clipboard
-
-`trim "  hello  " | cb`?
-
-### Document all operations as list with description of use examples
-Could be in the README as tail operations list after intro summary
-
 ### Consider agent use
-Consider how AI agents know how to use this as a skill to save tokens
+- [x] Created AGENTS.md — compact tool reference for LLM context windows
 
-### Performance
-Atomic operations have to consider or somehow validate their performance and/or fallbacks.
-Fetch for example needs baked in timeout or error resolution.

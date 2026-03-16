@@ -28,6 +28,12 @@ echo "secret" | b64 | b64 -d
 # secret
 ```
 
+Pipe results straight to your clipboard:
+
+```bash
+trim "  hello  " | clip
+```
+
 Boolean tools exit 0 (true) or 1 (false) — perfect for `if`/`&&`:
 
 ```bash
